@@ -2,7 +2,7 @@
  * Blueprint API Configuration
  * (sails.config.blueprints)
  *
- * These settings are for the global configuration of blueprint routes and
+ * These settings R for the global configuration of blueprint routes and
  * request options (which impact the behavior of blueprint actions).
  *
  * You may also override any of these settings on a per-controller basis
