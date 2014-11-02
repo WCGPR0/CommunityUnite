@@ -44,37 +44,32 @@ module.exports = {
 var twilio = require ('twilio'),
   qs = require('querystring');
 
-        var body = '';
-        req.on('data', function (data) {
-            body += data;
+var from = "";
+//	if (req.method == 'POST') 
+	/*var body = '';
+	req.on('data', function (data) {
+	body += data;
+	if (body.length > 1e6) req.connection.destroy();
+	});
+	req.on('end', function () { var post = qs.parse(body);
+	from = post.From;
+	});*/
 
-            // Too much POST data, kill the connection!
-            if (body.length > 1e6)
-                req.connection.destroy();
-        });
+	console.log(req.From);
 
-        req.on('end', function () {
- 	     	var post = qs.parse(body);
-		Messages.create().exec(function(err, model) { 
+
+	Messages.create( { callerID : 'testing', body : 'testing' }).exec(function(err, model) { 
 	if (err)
-		res.send("Error: Something went wrong!" + err);
-	else {
-		model.setProperties( {
-			callerID: post["From"],
-			body: post	
-		});
-		model.save(function (err) {
-			if (err) res.send("Error:" + err); });
-		
-           process.stdout.write(post["From"]);
-           process.stdout.write(post.From);
-		res.send("Successful");	
-	}
-           process.stdout.write(post["From"]);
-	   process.stdout.write(post);
-            // use post['blah'], etc.
-        });
- 	 }); 
+		process.stdout.write("Error: Something went wrong!" + err);	
+       		console.log( model );	
+//	});
+ 	 });
+
+var resp = new twilio.TwimlResponse();
+resp.message("Message recieved; thanks for using CommunityUnite!");
+res.setHeader('content-type', 'text/XML');
+res.end(resp.toString()); 
  }	
+
 };
 
