@@ -44,32 +44,30 @@ module.exports = {
 var twilio = require ('twilio'),
   qs = require('querystring');
 
-var from = "";
-//	if (req.method == 'POST') 
-	/*var body = '';
-	req.on('data', function (data) {
-	body += data;
-	if (body.length > 1e6) req.connection.destroy();
+	if (req.method == 'POST') {
+	var body = '';
+	req.on('data', function (chunk) {
+	body += chunk.toString();
+	//if (body.length > 1e6) req.connection.destroy();
 	});
-	req.on('end', function () { var post = qs.parse(body);
-	from = post.From;
-	});*/
+	
+	req.on('end', function () { 
+				body= qs.parse(body); 
+	});
 
-	console.log(req.From);
 
-
-	Messages.create( { callerID : 'testing', body : 'testing' }).exec(function(err, model) { 
+	Messages.create( { callerID : body.From, body : 'testing' }).exec(function(err, model) { 
 	if (err)
 		process.stdout.write("Error: Something went wrong!" + err);	
        		console.log( model );	
-//	});
- 	 });
+	});
+ 	 }
 
 var resp = new twilio.TwimlResponse();
 resp.message("Message recieved; thanks for using CommunityUnite!");
 res.setHeader('content-type', 'text/XML');
 res.end(resp.toString()); 
- }	
+}	
 
 };
 
