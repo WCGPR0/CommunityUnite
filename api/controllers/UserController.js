@@ -1,3 +1,17 @@
+var twilio = require ('twilio'),
+	 qs = require('querystring');
+var processRequest = function(req, callback) {
+    var body = '';
+    req.on('data', function (data) {
+        body += data;
+    });
+    req.on('end', function () {
+        callback(qs.parse(body));
+    });
+};
+
+
+
 /**
  * UserController
  *
@@ -40,7 +54,10 @@ module.exports = {
   post: function (req, res) {
 	
  },
- recieve: function (req, res) {
+
+
+
+recieve: function (req, res) {
 var twilio = require ('twilio'),
   qs = require('querystring');
 
