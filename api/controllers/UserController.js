@@ -58,33 +58,17 @@ module.exports = {
 
 
 recieve: function (req, res) {
-var twilio = require ('twilio'),
-  qs = require('querystring');
-
-	if (req.method == 'POST') {
-	var body = '';
-	req.on('data', function (chunk) {
-	body += chunk.toString();
-	//if (body.length > 1e6) req.connection.destroy();
-	});
-	
-	req.on('end', function () { 
-				body= qs.parse(body); 
-	});
-
-
-	Messages.create( { callerID : body.From, body : 'testing' }).exec(function(err, model) { 
-	if (err)
-		process.stdout.write("Error: Something went wrong!" + err);	
-       		console.log( model );	
-	});
- 	 }
-
 var resp = new twilio.TwimlResponse();
-resp.message("Message recieved; thanks for using CommunityUnite!");
-res.setHeader('content-type', 'text/XML');
-res.end(resp.toString()); 
-}	
+var from;
+	processRequest(req, function(data) {
+		from = data.From;
+		resp.message("Message recieved; thanks for using CommunityUnite!");
+		res.writeHead(200, {
+                'Content-Type':'text/xml'
+        });	
+	Messages.create( { callerID : data.From, body : 'testing' });
+	res.end(resp.toString()); 
+	});	
+}
 
 };
-

@@ -8,9 +8,8 @@
 module.exports = {
 
   attributes: {
-	callerID: 'string',
-	body: 'string',
-
+	callerID : 'string',
+	body : 'string',
   }
 };
 
