@@ -36,7 +36,6 @@ module.exports.routes = {
     view: 'index'
   },
   '/reply' : 'UserController.post',
-  '/recieve': 'UserController.recieve',
   'get /view': 'UserController.view',
 
   /***************************************************************************

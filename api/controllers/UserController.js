@@ -1,4 +1,4 @@
-var twilio = require ('twilio'),
+/*var twilio = require ('twilio'),
 	 qs = require('querystring');
 var processRequest = function(req, callback) {
     var body = '';
@@ -8,7 +8,7 @@ var processRequest = function(req, callback) {
     req.on('end', function () {
         callback(qs.parse(body));
     });
-};
+};*/
 
 
 
@@ -57,7 +57,7 @@ module.exports = {
 
 
 
-recieve: function (req, res) {
+/*recieve: function (req, res) {
 var resp = new twilio.TwimlResponse();
 var from;
 	processRequest(req, function(data) {
@@ -69,6 +69,6 @@ var from;
 	Messages.create( { callerID : data.From, body : 'testing' });
 	res.end(resp.toString()); 
 	});	
-}
+}*/
 
 };
